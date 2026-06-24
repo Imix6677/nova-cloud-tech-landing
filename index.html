@@ -108,6 +108,53 @@
         /* Utility classes for GSAP */
         .reveal-text { opacity: 0; transform: translateY(20px); }
         .reveal-card { opacity: 0; transform: translateY(30px); }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            margin: auto;
+            padding: 40px;
+            border: 1px solid #333;
+            border-radius: 16px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            position: relative;
+            color: #ffffff;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -115,14 +162,21 @@
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 mix-blend-difference py-6">
         <div class="grid-container items-center">
-            <div class="col-span-4 font-medium tracking-tight">Nova Cloud Tech</div>
+            <div class="col-span-4 font-medium tracking-tight" data-lang-key="nav_title">Nova Cloud Tech</div>
             <div class="col-span-4 flex justify-center space-x-8 text-sm text-secondary">
-                <a href="#architecture" class="hover:text-white transition-colors">Architecture</a>
-                <a href="#optimization" class="hover:text-white transition-colors">Optimization</a>
-                <a href="#security" class="hover:text-white transition-colors">Security</a>
+                <a href="#architecture" class="hover:text-white transition-colors" data-lang-key="nav_architecture">Architecture</a>
+                <a href="#optimization" class="hover:text-white transition-colors" data-lang-key="nav_optimization">Optimization</a>
+                <a href="#security" class="hover:text-white transition-colors" data-lang-key="nav_security">Security</a>
             </div>
-            <div class="col-span-4 flex justify-end">
-                <a href="mailto:zxcmega@nova-cloud-tech.xyz" class="text-sm font-medium border-b border-transparent hover:border-white transition-colors pb-1">Contact</a>
+            <div class="col-span-4 flex justify-end items-center space-x-4">
+                <div class="relative">
+                    <select id="language-switcher" class="bg-transparent border border-white/10 text-white text-sm rounded-full px-3 py-1 focus:ring-white focus:border-white">
+                        <option value="en">EN</option>
+                        <option value="ru">RU</option>
+                        <option value="kz">KZ</option>
+                    </select>
+                </div>
+                <a href="mailto:zxcmega@nova-cloud-tech.xyz" class="text-sm font-medium border-b border-transparent hover:border-white transition-colors pb-1" data-lang-key="nav_contact">Contact</a>
             </div>
         </div>
     </nav>
@@ -133,20 +187,20 @@
             <div class="col-span-12 md:col-span-10 lg:col-span-8">
                 <div class="badge mb-8 reveal-text">
                     <span class="status-dot"></span>
-                    AWS Activate Partner
+                    <span data-lang-key="hero_badge">AWS Activate Partner</span>
                 </div>
-                <h1 class="mb-8 reveal-text">
+                <h1 class="mb-8 reveal-text" data-lang-key="hero_title">
                     Enterprise AI Infrastructure,<br>
                     Engineered for Scale.
                 </h1>
-                <p class="text-body max-w-2xl mb-12 reveal-text">
+                <p class="text-body max-w-2xl mb-12 reveal-text" data-lang-key="hero_description">
                     We provide the orchestration layer for Large Language Models. Deploy, scale, and optimize your AI workloads on AWS with deterministic resource management and zero friction.
                 </p>
                 <div class="flex items-center space-x-6 reveal-text">
-                    <a href="#architecture" class="text-sm font-medium border border-white px-6 py-3 rounded-full hover:bg-white hover:text-black transition-colors">
+                    <a href="#architecture" class="text-sm font-medium border border-white px-6 py-3 rounded-full hover:bg-white hover:text-black transition-colors" data-lang-key="hero_explore_btn">
                         Explore Architecture
                     </a>
-                    <span class="text-sm text-secondary font-mono">v2.0.4-stable</span>
+                    <span class="text-sm text-secondary font-mono" data-lang-key="hero_version">v0.1.0-beta</span>
                 </div>
             </div>
         </div>
@@ -156,8 +210,8 @@
     <section id="architecture" class="py-32 border-t border-white/10">
         <div class="grid-container">
             <div class="col-span-12 mb-16 reveal-text">
-                <h2>Modular Architecture</h2>
-                <p class="text-body mt-4 max-w-xl">Our proprietary NovaCore™ engine abstracts the complexity of GPU cluster management, utilizing AWS EKS for 99.99% availability.</p>
+                <h2 data-lang-key="arch_title">Modular Architecture</h2>
+                <p class="text-body mt-4 max-w-xl" data-lang-key="arch_description">Our proprietary NovaCore™ engine abstracts the complexity of GPU cluster management, utilizing AWS EKS for 99.99% availability.</p>
             </div>
 
             <!-- Bento Grid Layout -->
@@ -166,8 +220,8 @@
                 <!-- Large Card: Code Snippet -->
                 <div class="bento-card col-span-1 md:col-span-8 reveal-card flex flex-col justify-between min-h-[400px]">
                     <div>
-                        <h3 class="text-xl font-medium mb-2">LLM Orchestration Config</h3>
-                        <p class="text-sm text-secondary mb-8">Declarative infrastructure management via YAML.</p>
+                        <h3 class="text-xl font-medium mb-2" data-lang-key="arch_llm_config_title">LLM Orchestration Config</h3>
+                        <p class="text-sm text-secondary mb-8" data-lang-key="arch_llm_config_desc">Declarative infrastructure management via YAML.</p>
                     </div>
                     <div class="bg-black/50 border border-white/5 rounded-lg p-6 font-mono text-sm text-gray-400 overflow-x-auto">
 <pre><code><span class="text-gray-500"># NovaCore Configuration</span>
@@ -186,30 +240,30 @@
                 <!-- Small Card 1 -->
                 <div class="bento-card col-span-1 md:col-span-4 reveal-card flex flex-col justify-between">
                     <div>
-                        <h3 class="text-xl font-medium mb-2">Multi-Region</h3>
-                        <p class="text-sm text-secondary">Automatic traffic rerouting between AWS regions to maintain zero downtime during inference.</p>
+                        <h3 class="text-xl font-medium mb-2" data-lang-key="arch_multi_region_title">Multi-Region</h3>
+                        <p class="text-sm text-secondary" data-lang-key="arch_multi_region_desc">Automatic traffic rerouting between AWS regions to maintain zero downtime during inference.</p>
                     </div>
                     <div class="mt-8 text-right">
-                        <span class="font-mono text-xs text-secondary">01 / ROUTING</span>
+                        <span class="font-mono text-xs text-secondary" data-lang-key="arch_multi_region_tag">01 / ROUTING</span>
                     </div>
                 </div>
 
                 <!-- Small Card 2 -->
                 <div class="bento-card col-span-1 md:col-span-4 reveal-card flex flex-col justify-between">
                     <div>
-                        <h3 class="text-xl font-medium mb-2">Quantization</h3>
-                        <p class="text-sm text-secondary">On-the-fly model optimization for various hardware types from A10G to H100.</p>
+                        <h3 class="text-xl font-medium mb-2" data-lang-key="arch_quantization_title">Quantization</h3>
+                        <p class="text-sm text-secondary" data-lang-key="arch_quantization_desc">On-the-fly model optimization for various hardware types from A10G to H100.</p>
                     </div>
                     <div class="mt-8 text-right">
-                        <span class="font-mono text-xs text-secondary">02 / COMPUTE</span>
+                        <span class="font-mono text-xs text-secondary" data-lang-key="arch_quantization_tag">02 / COMPUTE</span>
                     </div>
                 </div>
 
                 <!-- Medium Card -->
                 <div class="bento-card col-span-1 md:col-span-8 reveal-card flex flex-col justify-between">
                     <div>
-                        <h3 class="text-xl font-medium mb-2">Hybrid Deployment</h3>
-                        <p class="text-sm text-secondary max-w-md">Flexible deployment strategies across public cloud (AWS) and on-premise environments, ensuring data locality and compliance.</p>
+                        <h3 class="text-xl font-medium mb-2" data-lang-key="arch_hybrid_title">Hybrid Deployment</h3>
+                        <p class="text-sm text-secondary max-w-md" data-lang-key="arch_hybrid_desc">Flexible deployment strategies across public cloud (AWS) and on-premise environments, ensuring data locality and compliance.</p>
                     </div>
                     <div class="mt-8 flex gap-4">
                         <span class="badge">AWS Outposts</span>
@@ -225,25 +279,25 @@
     <section id="optimization" class="py-32 border-t border-white/10">
         <div class="grid-container">
             <div class="col-span-12 md:col-span-5 reveal-text">
-                <h2>Cost & Performance</h2>
-                <p class="text-body mt-6">Stop overpaying for compute. Our platform leverages AWS Spot Instances with zero interruption risk, utilizing predictive failover algorithms.</p>
+                <h2 data-lang-key="opt_title">Cost & Performance</h2>
+                <p class="text-body mt-6" data-lang-key="opt_description">Stop overpaying for compute. Our platform leverages AWS Spot Instances with zero interruption risk, utilizing predictive failover algorithms.</p>
             </div>
             
             <div class="col-span-12 md:col-span-6 md:col-start-7 grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12 md:mt-0">
                 <div class="bento-card reveal-card">
-                    <div class="text-5xl font-light mb-4">-40%</div>
-                    <h4 class="text-sm font-medium mb-2">GPU Spend</h4>
-                    <p class="text-xs text-secondary">Average reduction in monthly AWS bills through smart instance selection.</p>
+                    <div class="text-5xl font-light mb-4" data-lang-key="opt_gpu_spend_value">-40%</div>
+                    <h4 class="text-sm font-medium mb-2" data-lang-key="opt_gpu_spend_title">GPU Spend</h4>
+                    <p class="text-xs text-secondary" data-lang-key="opt_gpu_spend_desc">Average reduction in monthly AWS bills through smart instance selection.</p>
                 </div>
                 <div class="bento-card reveal-card">
-                    <div class="text-5xl font-light mb-4">2.4x</div>
-                    <h4 class="text-sm font-medium mb-2">Inference Speed</h4>
-                    <p class="text-xs text-secondary">Performance boost using custom CUDA kernels and optimized sharding.</p>
+                    <div class="text-5xl font-light mb-4" data-lang-key="opt_inference_speed_value">2.4x</div>
+                    <h4 class="text-sm font-medium mb-2" data-lang-key="opt_inference_speed_title">Inference Speed</h4>
+                    <p class="text-xs text-secondary" data-lang-key="opt_inference_speed_desc">Performance boost using custom CUDA kernels and optimized sharding.</p>
                 </div>
                 <div class="bento-card reveal-card sm:col-span-2">
-                    <div class="text-5xl font-light mb-4">99.99%</div>
-                    <h4 class="text-sm font-medium mb-2">Uptime SLA</h4>
-                    <p class="text-xs text-secondary">Guaranteed availability through our predictive failover engine.</p>
+                    <div class="text-5xl font-light mb-4" data-lang-key="opt_uptime_value">99.99%</div>
+                    <h4 class="text-sm font-medium mb-2" data-lang-key="opt_uptime_title">Uptime SLA</h4>
+                    <p class="text-xs text-secondary" data-lang-key="opt_uptime_desc">Guaranteed availability through our predictive failover engine.</p>
                 </div>
             </div>
         </div>
@@ -253,8 +307,8 @@
     <section id="security" class="py-32 border-t border-white/10 bg-white text-black">
         <div class="grid-container">
             <div class="col-span-12 md:col-span-6 reveal-text">
-                <h2 class="text-black">Security by Design</h2>
-                <p class="text-lg text-gray-600 mt-6 max-w-md">
+                <h2 class="text-black" data-lang-key="sec_title">Security by Design</h2>
+                <p class="text-lg text-gray-600 mt-6 max-w-md" data-lang-key="sec_description">
                     Enterprise data is sacred. Nova Cloud integrates directly into your existing AWS VPC, ensuring that training data and inference requests never traverse the public internet.
                 </p>
             </div>
@@ -262,24 +316,24 @@
                 <ul class="space-y-8">
                     <li class="reveal-card border-b border-black/10 pb-6">
                         <div class="flex items-baseline justify-between mb-2">
-                            <h4 class="text-xl font-medium">SOC2 Type II Ready</h4>
+                            <h4 class="text-xl font-medium" data-lang-key="sec_soc2_title">SOC2 Type II Ready</h4>
                             <span class="font-mono text-xs text-gray-400">01</span>
                         </div>
-                        <p class="text-sm text-gray-600">Audited processes for security, availability, and confidentiality.</p>
+                        <p class="text-sm text-gray-600" data-lang-key="sec_soc2_desc">Audited processes for security, availability, and confidentiality.</p>
                     </li>
                     <li class="reveal-card border-b border-black/10 pb-6">
                         <div class="flex items-baseline justify-between mb-2">
-                            <h4 class="text-xl font-medium">VPC-only Deployment</h4>
+                            <h4 class="text-xl font-medium" data-lang-key="sec_vpc_title">VPC-only Deployment</h4>
                             <span class="font-mono text-xs text-gray-400">02</span>
                         </div>
-                        <p class="text-sm text-gray-600">Leveraging AWS PrivateLink for isolated network connectivity.</p>
+                        <p class="text-sm text-gray-600" data-lang-key="sec_vpc_desc">Leveraging AWS PrivateLink for isolated network connectivity.</p>
                     </li>
                     <li class="reveal-card border-b border-black/10 pb-6">
                         <div class="flex items-baseline justify-between mb-2">
-                            <h4 class="text-xl font-medium">End-to-End Encryption</h4>
+                            <h4 class="text-xl font-medium" data-lang-key="sec_e2e_title">End-to-End Encryption</h4>
                             <span class="font-mono text-xs text-gray-400">03</span>
                         </div>
-                        <p class="text-sm text-gray-600">AES-256 encryption at rest and TLS 1.3 in transit.</p>
+                        <p class="text-sm text-gray-600" data-lang-key="sec_e2e_desc">AES-256 encryption at rest and TLS 1.3 in transit.</p>
                     </li>
                 </ul>
             </div>
@@ -290,73 +344,309 @@
     <footer class="py-12 border-t border-white/10">
         <div class="grid-container items-end">
             <div class="col-span-12 md:col-span-6">
-                <div class="text-xl font-medium tracking-tight mb-4">Nova Cloud Tech</div>
-                <p class="text-sm text-secondary max-w-xs">
+                <div class="text-xl font-medium tracking-tight mb-4" data-lang-key="footer_title">Nova Cloud Tech</div>
+                <p class="text-sm text-secondary max-w-xs" data-lang-key="footer_tagline">
                     Building the future of scalable AI infrastructure. Proudly hosted on AWS.
                 </p>
             </div>
             <div class="col-span-12 md:col-span-6 flex flex-col md:flex-row justify-between md:justify-end gap-8 mt-12 md:mt-0 text-sm text-secondary">
                 <div>
-                    <span class="block text-white mb-4 font-medium">Contact</span>
+                    <span class="block text-white mb-4 font-medium" data-lang-key="footer_contact_title">Contact</span>
                     <a href="mailto:zxcmega@nova-cloud-tech.xyz" class="hover:text-white transition-colors block mb-2">zxcmega@nova-cloud-tech.xyz</a>
-                    <span class="block">Karaganda, Kazakhstan</span>
+                    <span class="block" data-lang-key="footer_location">Karaganda, Kazakhstan</span>
                 </div>
                 <div>
-                    <span class="block text-white mb-4 font-medium">Legal</span>
-                    <a href="#" class="hover:text-white transition-colors block mb-2">Privacy Policy</a>
-                    <a href="#" class="hover:text-white transition-colors block">Terms of Service</a>
+                    <span class="block text-white mb-4 font-medium" data-lang-key="footer_legal_title">Legal</span>
+                    <a href="#" class="hover:text-white transition-colors block mb-2" id="privacy-policy-link" data-lang-key="footer_privacy">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors block" id="terms-of-service-link" data-lang-key="footer_terms">Terms of Service</a>
                 </div>
             </div>
             <div class="col-span-12 mt-16 pt-8 border-t border-white/10 flex justify-between items-center text-xs text-secondary">
-                <span>&copy; 2026 Nova Cloud Tech.</span>
-                <span class="font-mono">SYS_STATUS: ONLINE</span>
+                <span data-lang-key="footer_copyright">&copy; 2026 Nova Cloud Tech.</span>
+                <span class="font-mono" data-lang-key="footer_status">SYS_STATUS: ONLINE</span>
             </div>
         </div>
     </footer>
 
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-policy-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 class="text-2xl font-medium mb-4" data-lang-key="modal_privacy_title">Privacy Policy</h2>
+            <p class="text-body text-sm" data-lang-key="modal_privacy_content">
+                This Privacy Policy describes how Nova Cloud Tech collects, uses, and discloses your information when you use our service. We are committed to protecting your privacy. We collect minimal data necessary for service operation and improvement. We do not share your personal data with third parties without your explicit consent. Your data is secured using industry-standard encryption and access controls. By using our service, you agree to the collection and use of information in accordance with this policy.
+            </p>
+        </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div id="terms-of-service-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 class="text-2xl font-medium mb-4" data-lang-key="modal_terms_title">Terms of Service</h2>
+            <p class="text-body text-sm" data-lang-key="modal_terms_content">
+                Welcome to Nova Cloud Tech. These Terms of Service govern your use of our platform and services. By accessing or using our service, you agree to be bound by these Terms. Our service is provided "as is" without any warranties. You agree to use the service in compliance with all applicable laws and regulations. We reserve the right to modify or terminate our service at any time without prior notice. All intellectual property rights related to the service are owned by Nova Cloud Tech. For any disputes, the laws of Kazakhstan shall apply.
+            </p>
+        </div>
+    </div>
+
     <!-- GSAP Animations -->
     <script>
         gsap.registerPlugin(ScrollTrigger);
+
+        // Language content
+        const translations = {
+            en: {
+                nav_title: "Nova Cloud Tech",
+                nav_architecture: "Architecture",
+                nav_optimization: "Optimization",
+                nav_security: "Security",
+                nav_contact: "Contact",
+                hero_badge: "AWS Activate Partner",
+                hero_title: "Enterprise AI Infrastructure,<br>Engineered for Scale.",
+                hero_description: "We provide the orchestration layer for Large Language Models. Deploy, scale, and optimize your AI workloads on AWS with deterministic resource management and zero friction.",
+                hero_explore_btn: "Explore Architecture",
+                hero_version: "v0.1.0-beta",
+                arch_title: "Modular Architecture",
+                arch_description: "Our proprietary NovaCore™ engine abstracts the complexity of GPU cluster management, utilizing AWS EKS for 99.99% availability.",
+                arch_llm_config_title: "LLM Orchestration Config",
+                arch_llm_config_desc: "Declarative infrastructure management via YAML.",
+                arch_multi_region_title: "Multi-Region",
+                arch_multi_region_desc: "Automatic traffic rerouting between AWS regions to maintain zero downtime during inference.",
+                arch_multi_region_tag: "01 / ROUTING",
+                arch_quantization_title: "Quantization",
+                arch_quantization_desc: "On-the-fly model optimization for various hardware types from A10G to H100.",
+                arch_quantization_tag: "02 / COMPUTE",
+                arch_hybrid_title: "Hybrid Deployment",
+                arch_hybrid_desc: "Flexible deployment strategies across public cloud (AWS) and on-premise environments, ensuring data locality and compliance.",
+                opt_title: "Cost & Performance",
+                opt_description: "Stop overpaying for compute. Our platform leverages AWS Spot Instances with zero interruption risk, utilizing predictive failover algorithms.",
+                opt_gpu_spend_value: "-40%",
+                opt_gpu_spend_title: "GPU Spend",
+                opt_gpu_spend_desc: "Average reduction in monthly AWS bills through smart instance selection.",
+                opt_inference_speed_value: "2.4x",
+                opt_inference_speed_title: "Inference Speed",
+                opt_inference_speed_desc: "Performance boost using custom CUDA kernels and optimized sharding.",
+                opt_uptime_value: "99.99%",
+                opt_uptime_title: "Uptime SLA",
+                opt_uptime_desc: "Guaranteed availability through our predictive failover engine.",
+                sec_title: "Security by Design",
+                sec_description: "Enterprise data is sacred. Nova Cloud integrates directly into your existing AWS VPC, ensuring that training data and inference requests never traverse the public internet.",
+                sec_soc2_title: "SOC2 Type II Ready",
+                sec_soc2_desc: "Audited processes for security, availability, and confidentiality.",
+                sec_vpc_title: "VPC-only Deployment",
+                sec_vpc_desc: "Leveraging AWS PrivateLink for isolated network connectivity.",
+                sec_e2e_title: "End-to-End Encryption",
+                sec_e2e_desc: "AES-256 encryption at rest and TLS 1.3 in transit.",
+                footer_title: "Nova Cloud Tech",
+                footer_tagline: "Building the future of scalable AI infrastructure. Proudly hosted on AWS.",
+                footer_contact_title: "Contact",
+                footer_location: "Karaganda, Kazakhstan",
+                footer_legal_title: "Legal",
+                footer_privacy: "Privacy Policy",
+                footer_terms: "Terms of Service",
+                footer_copyright: "&copy; 2026 Nova Cloud Tech.",
+                footer_status: "SYS_STATUS: ONLINE",
+                modal_privacy_title: "Privacy Policy",
+                modal_privacy_content: "This Privacy Policy describes how Nova Cloud Tech collects, uses, and discloses your information when you use our service. We are committed to protecting your privacy. We collect minimal data necessary for service operation and improvement. We do not share your personal data with third parties without your explicit consent. Your data is secured using industry-standard encryption and access controls. By using our service, you agree to the collection and use of information in accordance with this policy.",
+                modal_terms_title: "Terms of Service",
+                modal_terms_content: "Welcome to Nova Cloud Tech. These Terms of Service govern your use of our platform and services. By accessing or using our service, you agree to be bound by these Terms. Our service is provided \"as is\" without any warranties. You agree to use the service in compliance with all applicable laws and regulations. We reserve the right to modify or terminate our service at any time without prior notice. All intellectual property rights related to the service are owned by Nova Cloud Tech. For any disputes, the laws of Kazakhstan shall apply."
+            },
+            ru: {
+                nav_title: "Nova Cloud Tech",
+                nav_architecture: "Архитектура",
+                nav_optimization: "Оптимизация",
+                nav_security: "Безопасность",
+                nav_contact: "Контакты",
+                hero_badge: "Партнер AWS Activate",
+                hero_title: "Корпоративная ИИ-инфраструктура,<br>Разработанная для масштаба.",
+                hero_description: "Мы предоставляем уровень оркестровки для больших языковых моделей. Развертывайте, масштабируйте и оптимизируйте свои рабочие нагрузки ИИ на AWS с детерминированным управлением ресурсами и без лишних сложностей.",
+                hero_explore_btn: "Изучить архитектуру",
+                hero_version: "v0.1.0-beta",
+                arch_title: "Модульная архитектура",
+                arch_description: "Наш проприетарный движок NovaCore™ абстрагирует сложность управления кластерами GPU, используя AWS EKS для 99.99% доступности.",
+                arch_llm_config_title: "Конфигурация оркестровки LLM",
+                arch_llm_config_desc: "Декларативное управление инфраструктурой через YAML.",
+                arch_multi_region_title: "Мультирегиональность",
+                arch_multi_region_desc: "Автоматическая перемаршрутизация трафика между регионами AWS для поддержания нулевого времени простоя во время инференса.",
+                arch_multi_region_tag: "01 / МАРШРУТИЗАЦИЯ",
+                arch_quantization_title: "Квантование",
+                arch_quantization_desc: "Оптимизация моделей на лету для различных типов оборудования от A10G до H100.",
+                arch_quantization_tag: "02 / ВЫЧИСЛЕНИЯ",
+                arch_hybrid_title: "Гибридное развертывание",
+                arch_hybrid_desc: "Гибкие стратегии развертывания в публичном облаке (AWS) и локальных средах, обеспечивающие локализацию данных и соответствие требованиям.",
+                opt_title: "Стоимость и производительность",
+                opt_description: "Перестаньте переплачивать за вычисления. Наша платформа использует инстансы AWS Spot с нулевым риском прерывания, применяя алгоритмы предиктивного отказа.",
+                opt_gpu_spend_value: "-40%",
+                opt_gpu_spend_title: "Расходы на GPU",
+                opt_gpu_spend_desc: "Среднее снижение ежемесячных счетов AWS за счет интеллектуального выбора инстансов.",
+                opt_inference_speed_value: "2.4x",
+                opt_inference_speed_title: "Скорость инференса",
+                opt_inference_speed_desc: "Повышение производительности за счет пользовательских ядер CUDA и оптимизированного шардинга.",
+                opt_uptime_value: "99.99%",
+                opt_uptime_title: "SLA по аптайму",
+                opt_uptime_desc: "Гарантированная доступность благодаря нашему движку предиктивного отказа.",
+                sec_title: "Безопасность по умолчанию",
+                sec_description: "Корпоративные данные священны. Nova Cloud интегрируется непосредственно в ваш существующий AWS VPC, гарантируя, что обучающие данные и запросы инференса никогда не будут проходить через публичный интернет.",
+                sec_soc2_title: "Готовность к SOC2 Type II",
+                sec_soc2_desc: "Проверенные процессы для обеспечения безопасности, доступности и конфиденциальности.",
+                sec_vpc_title: "Развертывание только в VPC",
+                sec_vpc_desc: "Использование AWS PrivateLink для изолированного сетевого подключения.",
+                sec_e2e_title: "Сквозное шифрование",
+                sec_e2e_desc: "Шифрование AES-256 в состоянии покоя и TLS 1.3 при передаче.",
+                footer_title: "Nova Cloud Tech",
+                footer_tagline: "Создаем будущее масштабируемой ИИ-инфраструктуры. С гордостью размещено на AWS.",
+                footer_contact_title: "Контакты",
+                footer_location: "Караганда, Казахстан",
+                footer_legal_title: "Юридическая информация",
+                footer_privacy: "Политика конфиденциальности",
+                footer_terms: "Условия использования",
+                footer_copyright: "&copy; 2026 Nova Cloud Tech.",
+                footer_status: "СТАТУС_СИСТЕМЫ: ОНЛАЙН",
+                modal_privacy_title: "Политика конфиденциальности",
+                modal_privacy_content: "Настоящая Политика конфиденциальности описывает, как Nova Cloud Tech собирает, использует и раскрывает вашу информацию при использовании нашего сервиса. Мы обязуемся защищать вашу конфиденциальность. Мы собираем минимальные данные, необходимые для работы и улучшения сервиса. Мы не передаем ваши персональные данные третьим лицам без вашего явного согласия. Ваши данные защищены с использованием стандартного отраслевого шифрования и контроля доступа. Используя наш сервис, вы соглашаетесь на сбор и использование информации в соответствии с настоящей политикой.",
+                modal_terms_title: "Условия использования",
+                modal_terms_content: "Добро пожаловать в Nova Cloud Tech. Настоящие Условия использования регулируют использование вами нашей платформы и услуг. Получая доступ к нашему сервису или используя его, вы соглашаетесь соблюдать настоящие Условия. Наш сервис предоставляется \"как есть\" без каких-либо гарантий. Вы соглашаетесь использовать сервис в соответствии со всеми применимыми законами и правилами. Мы оставляем за собой право изменять или прекращать наш сервис в любое время без предварительного уведомления. Все права интеллектуальной собственности, связанные с сервисом, принадлежат Nova Cloud Tech. Для любых споров применяются законы Казахстана."
+            },
+            kz: {
+                nav_title: "Nova Cloud Tech",
+                nav_architecture: "Архитектура",
+                nav_optimization: "Оңтайландыру",
+                nav_security: "Қауіпсіздік",
+                nav_contact: "Байланыс",
+                hero_badge: "AWS Activate Серіктесі",
+                hero_title: "Кәсіпорынның ЖИ Инфрақұрылымы,<br>Масштабтауға арналған.",
+                hero_description: "Біз үлкен тілдік модельдер үшін оркестрлеу қабатын ұсынамыз. ЖИ жұмыс жүктемелеріңізді AWS-те детерминистік ресурстарды басқару және кедергісіз орналастырыңыз, масштабтаңыз және оңтайландырыңыз.",
+                hero_explore_btn: "Архитектураны зерттеу",
+                hero_version: "v0.1.0-beta",
+                arch_title: "Модульдік архитектура",
+                arch_description: "Біздің меншікті NovaCore™ қозғалтқышы GPU кластерін басқарудың күрделілігін абстракциялайды, 99.99% қолжетімділік үшін AWS EKS пайдаланады.",
+                arch_llm_config_title: "LLM Оркестрлеу Конфигурациясы",
+                arch_llm_config_desc: "YAML арқылы декларативті инфрақұрылымды басқару.",
+                arch_multi_region_title: "Көп аймақты",
+                arch_multi_region_desc: "Инференс кезінде нөлдік тоқтап қалу уақытын сақтау үшін AWS аймақтары арасында трафикті автоматты түрде қайта бағыттау.",
+                arch_multi_region_tag: "01 / БАҒЫТТАУ",
+                arch_quantization_title: "Кванттау",
+                arch_quantization_desc: "A10G-ден H100-ге дейінгі әртүрлі аппараттық құралдар үшін модельді жедел оңтайландыру.",
+                arch_quantization_tag: "02 / ЕСЕПТЕУ",
+                arch_hybrid_title: "Гибридті орналастыру",
+                arch_hybrid_desc: "Деректердің локализациясын және сәйкестігін қамтамасыз ететін жалпыға ортақ бұлтта (AWS) және жергілікті орталарда икемді орналастыру стратегиялары.",
+                opt_title: "Шығындар және өнімділік",
+                opt_description: "Есептеулер үшін артық төлеуді тоқтатыңыз. Біздің платформа болжамды істен шығу алгоритмдерін қолдана отырып, үзіліс қаупі нөлдік AWS Spot инстанстарын пайдаланады.",
+                opt_gpu_spend_value: "-40%",
+                opt_gpu_spend_title: "GPU шығындары",
+                opt_gpu_spend_desc: "Интеллектуалды инстанс таңдау арқылы ай сайынғы AWS шоттарының орташа төмендеуі.",
+                opt_inference_speed_value: "2.4x",
+                opt_inference_speed_title: "Инференс жылдамдығы",
+                opt_inference_speed_desc: "Пайдаланушылық CUDA ядролары мен оңтайландырылған шардингті пайдалану арқылы өнімділікті арттыру.",
+                opt_uptime_value: "99.99%",
+                opt_uptime_title: "Жұмыс уақыты SLA",
+                opt_uptime_desc: "Біздің болжамды істен шығу қозғалтқышы арқылы кепілдендірілген қолжетімділік.",
+                sec_title: "Дизайн бойынша қауіпсіздік",
+                sec_description: "Кәсіпорын деректері қасиетті. Nova Cloud тікелей сіздің бұрыннан бар AWS VPC-ге біріктіріледі, бұл оқыту деректері мен инференс сұрауларының ешқашан жалпыға ортақ интернет арқылы өтпеуін қамтамасыз етеді.",
+                sec_soc2_title: "SOC2 Type II дайын",
+                sec_soc2_desc: "Қауіпсіздік, қолжетімділік және құпиялылық үшін тексерілген процестер.",
+                sec_vpc_title: "Тек VPC орналастыру",
+                sec_vpc_desc: "Оқшауланған желілік қосылым үшін AWS PrivateLink пайдалану.",
+                sec_e2e_title: "Бастан-аяқ шифрлау",
+                sec_e2e_desc: "Тыныштықтағы AES-256 шифрлауы және тасымалдаудағы TLS 1.3.",
+                footer_title: "Nova Cloud Tech",
+                footer_tagline: "Масштабталатын ЖИ инфрақұрылымының болашағын құру. AWS-те мақтанышпен орналастырылған.",
+                footer_contact_title: "Байланыс",
+                footer_location: "Қарағанды, Қазақстан",
+                footer_legal_title: "Заңды",
+                footer_privacy: "Құпиялылық саясаты",
+                footer_terms: "Қызмет көрсету шарттары",
+                footer_copyright: "&copy; 2026 Nova Cloud Tech.",
+                footer_status: "ЖҮЙЕ_КҮЙІ: ОНЛАЙН",
+                modal_privacy_title: "Құпиялылық саясаты",
+                modal_privacy_content: "Бұл Құпиялылық саясаты Nova Cloud Tech қызметімізді пайдаланған кезде ақпаратыңызды қалай жинайтынын, пайдаланатынын және ашатынын сипаттайды. Біз сіздің құпиялылығыңызды қорғауға міндеттіміз. Біз қызметтің жұмыс істеуі мен жақсартуы үшін қажетті ең аз деректерді жинаймыз. Біз сіздің жеке деректеріңізді сіздің нақты келісіміңізсіз үшінші тараптармен бөліспейміз. Сіздің деректеріңіз салалық стандартты шифрлау және қол жеткізуді басқару арқылы қорғалған. Біздің қызметімізді пайдалану арқылы сіз осы саясатқа сәйкес ақпаратты жинауға және пайдалануға келісесіз.",
+                modal_terms_title: "Қызмет көрсету шарттары",
+                modal_terms_content: "Nova Cloud Tech-ке қош келдіңіз. Бұл Қызмет көрсету шарттары біздің платформамызды және қызметтерімізді пайдалануыңызды реттейді. Біздің қызметімізге кіру немесе оны пайдалану арқылы сіз осы Шарттармен байланысты болуға келісесіз. Біздің қызметіміз ешқандай кепілдіксіз \"сол қалпында\" ұсынылады. Сіз қызметті барлық қолданыстағы заңдар мен ережелерге сәйкес пайдалануға келісесіз. Біз кез келген уақытта алдын ала ескертусіз қызметімізді өзгертуге немесе тоқтатуға құқылымыз. Қызметке қатысты барлық зияткерлік меншік құқықтары Nova Cloud Tech-ке тиесілі. Кез келген даулар үшін Қазақстан заңдары қолданылады."
+            }
+        };
+
+        function updateContent(lang) {
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[lang] && translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+            document.documentElement.lang = lang;
+            localStorage.setItem('selectedLanguage', lang);
+        }
+
+        // Set initial language
+        const initialLang = localStorage.getItem('selectedLanguage') || 'en';
+        document.getElementById('language-switcher').value = initialLang;
+        updateContent(initialLang);
+
+        // Language switcher event listener
+        document.getElementById('language-switcher').addEventListener('change', (event) => {
+            updateContent(event.target.value);
+        });
 
         // Hero Animations
         gsap.to(".reveal-text", {
             y: 0,
             opacity: 1,
             duration: 1,
-            stagger: 0.15,
+            stagger: 0.2,
             ease: "power3.out",
             delay: 0.2
         });
 
-        // Scroll Animations for Cards
-        gsap.utils.toArray('.reveal-card').forEach(card => {
-            gsap.to(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 85%",
-                    toggleActions: "play none none reverse"
-                },
-                y: 0,
-                opacity: 1,
-                duration: 0.8,
-                ease: "power2.out"
-            });
+        // Card Animations
+        gsap.utils.toArray(".reveal-card").forEach(card => {
+            gsap.fromTo(card, 
+                { y: 50, opacity: 0 },
+                { 
+                    y: 0, 
+                    opacity: 1, 
+                    duration: 0.8, 
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
         });
 
-        // Scroll Animations for Section Headers
-        gsap.utils.toArray('section h2').forEach(header => {
-            gsap.from(header, {
-                scrollTrigger: {
-                    trigger: header,
-                    start: "top 85%",
-                    toggleActions: "play none none reverse"
-                },
-                y: 20,
-                opacity: 0,
-                duration: 0.8,
-                ease: "power2.out"
-            });
+        // Modal functionality
+        const privacyPolicyModal = document.getElementById('privacy-policy-modal');
+        const termsOfServiceModal = document.getElementById('terms-of-service-modal');
+        const privacyPolicyLink = document.getElementById('privacy-policy-link');
+        const termsOfServiceLink = document.getElementById('terms-of-service-link');
+        const closeButtons = document.querySelectorAll('.close-button');
+
+        privacyPolicyLink.onclick = function(event) {
+            event.preventDefault();
+            privacyPolicyModal.style.display = "flex";
+        }
+
+        termsOfServiceLink.onclick = function(event) {
+            event.preventDefault();
+            termsOfServiceModal.style.display = "flex";
+        }
+
+        closeButtons.forEach(button => {
+            button.onclick = function() {
+                privacyPolicyModal.style.display = "none";
+                termsOfServiceModal.style.display = "none";
+            }
         });
+
+        window.onclick = function(event) {
+            if (event.target == privacyPolicyModal) {
+                privacyPolicyModal.style.display = "none";
+            }
+            if (event.target == termsOfServiceModal) {
+                termsOfServiceModal.style.display = "none";
+            }
+        }
     </script>
 </body>
 </html>
