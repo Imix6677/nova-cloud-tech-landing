@@ -3,115 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Cloud Tech - AI Cloud Solutions</title>
+    <title>Nova Cloud Tech | Next-Gen AI Infrastructure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #232f3e;
-            --secondary: #ff9900;
-            --text: #333;
-            --bg: #f8f9fa;
-        }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: var(--bg);
-            color: var(--text);
-            text-align: center;
-            padding: 20px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #030712;
+            color: #f3f4f6;
+            overflow-x: hidden;
         }
-        .container {
-            background-color: #fff;
-            padding: 60px 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            max-width: 700px;
-            width: 100%;
-            border-top: 5px solid var(--secondary);
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        h1 {
-            color: var(--primary);
-            font-size: 2.8em;
-            margin-bottom: 20px;
-            font-weight: 800;
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .tagline {
-            font-size: 1.25em;
-            color: #666;
-            margin-bottom: 30px;
-            font-weight: 500;
+        .glow {
+            box-shadow: 0 0 50px rgba(96, 165, 240, 0.15);
         }
-        .description {
-            font-size: 1.1em;
-            line-height: 1.8;
-            margin-bottom: 40px;
-            color: #444;
-            text-align: left;
-            background: #fcfcfc;
-            padding: 20px;
-            border-left: 3px solid #eee;
-        }
-        .contact {
-            font-size: 0.95em;
-            color: #888;
-            margin-top: 30px;
-        }
-        .contact a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            background: #232f3e;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-            margin-top: 20px;
-        }
-        .badge span {
-            color: var(--secondary);
-            margin-right: 6px;
-        }
-        .status {
-            display: inline-block;
-            background: #e8f5e9;
-            color: #2e7d32;
-            padding: 5px 12px;
-            border-radius: 4px;
-            font-size: 0.8em;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 15px;
+        .grid-bg {
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 40px 40px;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="status">Development Phase</div>
-        <h1>Nova Cloud Tech</h1>
-        <p class="tagline">Next-Generation AI Infrastructure & Cloud Optimization</p>
-        
-        <div class="description">
-            Nova Cloud Tech is building an intelligent orchestration layer for cloud-native AI applications. 
-            Our platform focuses on automating the deployment and scaling of Large Language Models (LLMs) 
-            while optimizing infrastructure costs through advanced resource allocation.
+<body class="grid-bg">
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center glass rounded-2xl px-6 py-3">
+            <div class="text-xl font-extrabold tracking-tighter flex items-center">
+                <span class="text-blue-500 mr-2">◈</span> NOVA CLOUD
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
+                <a href="#" class="hover:text-white transition">Architecture</a>
+                <a href="#" class="hover:text-white transition">Optimization</a>
+                <a href="#" class="hover:text-white transition">Security</a>
+            </div>
+            <div class="text-xs font-bold px-4 py-2 border border-blue-500/30 rounded-full text-blue-400">
+                BETA ACCESS
+            </div>
         </div>
+    </nav>
 
-        <div class="badge">
-            <span>⚡</span> Powered by Amazon Web Services
-        </div>
+    <!-- Hero Section -->
+    <main class="relative pt-32 pb-20 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-block px-4 py-1.5 mb-6 glass rounded-full text-xs font-bold tracking-widest text-blue-400 uppercase">
+                Now Scaling on AWS Infrastructure
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-8 tracking-tight leading-tight">
+                The Intelligence Layer for <br>
+                <span class="gradient-text">Cloud-Native AI</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+                Automating LLM orchestration and infrastructure scaling. We provide the tools to deploy, monitor, and optimize generative AI at production scale.
+            </p>
+            
+            <div class="flex flex-col md:flex-row justify-center gap-4 mb-20">
+                <div class="px-8 py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition cursor-pointer">
+                    View Documentation
+                </div>
+                <div class="px-8 py-4 glass font-bold rounded-xl hover:bg-white/5 transition cursor-pointer">
+                    Contact Engineering
+                </div>
+            </div>
 
-        <div class="contact">
-            Contact: <a href="mailto:zxcmega@nova-cloud-tech.xyz">zxcmega@nova-cloud-tech.xyz</a><br>
-            Karaganda, Kazakhstan
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-3 gap-6 text-left">
+                <div class="p-8 glass rounded-3xl glow">
+                    <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">LLM Orchestration</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Seamlessly manage model deployments across multiple regions with automated failover and load balancing.</p>
+                </div>
+                <div class="p-8 glass rounded-3xl">
+                    <div class="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Cost Optimization</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Advanced resource allocation algorithms that reduce GPU/CPU waste by up to 40% using AWS Spot Instances.</p>
+                </div>
+                <div class="p-8 glass rounded-3xl">
+                    <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Enterprise Security</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Built-in VPC integration and IAM role management to ensure your data never leaves your secure cloud perimeter.</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-8 md:mb-0">
+                <div class="text-lg font-bold mb-2 uppercase tracking-tighter">Nova Cloud Tech</div>
+                <p class="text-gray-500 text-sm">© 2026 Engineering the future of AI infrastructure.</p>
+            </div>
+            <div class="flex flex-col items-end text-right">
+                <div class="text-sm font-bold text-gray-400 mb-1">HQ: Karaganda, Kazakhstan</div>
+                <a href="mailto:zxcmega@nova-cloud-tech.xyz" class="text-blue-400 font-medium hover:underline">zxcmega@nova-cloud-tech.xyz</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
