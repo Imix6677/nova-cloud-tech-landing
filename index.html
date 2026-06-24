@@ -5,225 +5,358 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nova Cloud Tech | Enterprise AI Infrastructure</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #000000;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-color: #ffffff;
+        }
+
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #020617;
-            color: #f8fafc;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
-        .glass {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
         }
-        .gradient-border {
-            position: relative;
-            border-radius: 1.5rem;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.5), rgba(168, 85, 247, 0.5));
-            padding: 1px;
+
+        /* Taste-Skill: Strict Grid & Spacing */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 48px;
         }
-        .gradient-border > div {
-            background: #020617;
-            border-radius: 1.5rem;
+
+        /* Taste-Skill: Bento Layouts */
+        .bento-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
-        .glow-blue {
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+
+        .bento-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.2);
         }
+
+        /* Taste-Skill: Typography Hierarchy */
+        h1 {
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 500;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .text-body {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Taste-Skill: Minimalist UI Elements */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 100px;
+            border: 1px solid var(--border-color);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        /* Utility classes for GSAP */
+        .reveal-text { opacity: 0; transform: translateY(20px); }
+        .reveal-card { opacity: 0; transform: translateY(30px); }
     </style>
 </head>
-<body class="selection:bg-blue-500/30">
+<body>
+
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 px-6 py-6">
-        <div class="max-w-6xl mx-auto flex justify-between items-center glass rounded-2xl px-8 py-4 border border-white/10">
-            <div class="text-xl font-extrabold tracking-tighter flex items-center">
-                <span class="bg-blue-600 w-3 h-3 rounded-full mr-3 animate-pulse"></span>
-                NOVA CLOUD
-            </div>
-            <div class="hidden lg:flex space-x-10 text-sm font-semibold text-slate-400">
+    <nav class="fixed top-0 w-full z-50 mix-blend-difference py-6">
+        <div class="grid-container items-center">
+            <div class="col-span-4 font-medium tracking-tight">Nova Cloud Tech</div>
+            <div class="col-span-4 flex justify-center space-x-8 text-sm text-secondary">
                 <a href="#architecture" class="hover:text-white transition-colors">Architecture</a>
                 <a href="#optimization" class="hover:text-white transition-colors">Optimization</a>
                 <a href="#security" class="hover:text-white transition-colors">Security</a>
             </div>
-            <a href="mailto:zxcmega@nova-cloud-tech.xyz" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-6 py-2.5 rounded-lg transition-all">
-                REQUEST DEMO
-            </a>
+            <div class="col-span-4 flex justify-end">
+                <a href="mailto:zxcmega@nova-cloud-tech.xyz" class="text-sm font-medium border-b border-transparent hover:border-white transition-colors pb-1">Contact</a>
+            </div>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="relative pt-48 pb-32 overflow-hidden">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/10 blur-[120px] rounded-full -z-10"></div>
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold tracking-widest uppercase mb-8">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                </span>
-                AWS Activate Partner Program
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center pt-32 pb-20">
+        <div class="grid-container">
+            <div class="col-span-12 md:col-span-10 lg:col-span-8">
+                <div class="badge mb-8 reveal-text">
+                    <span class="status-dot"></span>
+                    AWS Activate Partner
+                </div>
+                <h1 class="mb-8 reveal-text">
+                    Enterprise AI Infrastructure,<br>
+                    Engineered for Scale.
+                </h1>
+                <p class="text-body max-w-2xl mb-12 reveal-text">
+                    We provide the orchestration layer for Large Language Models. Deploy, scale, and optimize your AI workloads on AWS with deterministic resource management and zero friction.
+                </p>
+                <div class="flex items-center space-x-6 reveal-text">
+                    <a href="#architecture" class="text-sm font-medium border border-white px-6 py-3 rounded-full hover:bg-white hover:text-black transition-colors">
+                        Explore Architecture
+                    </a>
+                    <span class="text-sm text-secondary font-mono">v2.0.4-stable</span>
+                </div>
             </div>
-            <h1 class="text-6xl md:text-8xl font-extrabold tracking-tight leading-[1.1] mb-8">
-                Scale AI with <br>
-                <span class="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-purple-500">Zero Friction</span>
-            </h1>
-            <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
-                The enterprise-grade orchestration layer for Large Language Models. Deploy, scale, and optimize your AI infrastructure on AWS with automated resource management.
-            </p>
         </div>
     </section>
 
-    <!-- Architecture Section -->
-    <section id="architecture" class="py-32 bg-slate-950/50">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-20 items-center">
-                <div>
-                    <h2 class="text-4xl font-bold mb-6">Advanced <span class="text-blue-500">LLM Architecture</span></h2>
-                    <p class="text-slate-400 mb-8 leading-relaxed text-lg">
-                        Our proprietary NovaCore™ engine abstracts the complexity of GPU cluster management. By utilizing AWS EKS and custom scheduling, we ensure 99.99% availability for your inference endpoints.
-                    </p>
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-3">
-                            <div class="mt-1 bg-blue-500/20 p-1 rounded">
-                                <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-                            </div>
-                            <div>
-                                <h4 class="font-bold">Multi-Region Failover</h4>
-                                <p class="text-sm text-slate-500">Automatic traffic rerouting between AWS regions to maintain zero downtime.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <div class="mt-1 bg-blue-500/20 p-1 rounded">
-                                <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-                            </div>
-                            <div>
-                                <h4 class="font-bold">Dynamic Model Quantization</h4>
-                                <p class="text-sm text-slate-500">On-the-fly model optimization for various hardware types from A10G to H100.</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="gradient-border glow-blue">
-                    <div class="p-10">
-                        <div class="flex items-center gap-4 mb-8">
-                            <div class="flex gap-1.5">
-                                <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
-                            </div>
-                            <div class="text-[10px] font-mono text-slate-500">infrastructure_config.yaml</div>
-                        </div>
-                        <pre class="font-mono text-sm text-blue-300 space-y-2">
-<span class="text-slate-500"># NovaCore Orchestration Config</span>
-<span class="text-purple-400">cluster:</span>
-  <span class="text-purple-400">provider:</span> aws_eks
-  <span class="text-purple-400">scaling:</span> dynamic_gpu_aware
-  <span class="text-purple-400">models:</span>
-    - <span class="text-green-400">"llama-3-70b-v1"</span>
-    - <span class="text-green-400">"mistral-large-latest"</span>
-<span class="text-purple-400">optimization:</span>
-  <span class="text-purple-400">use_spot:</span> true
-  <span class="text-purple-400">min_reliability:</span> 0.99
-                        </pre>
+    <!-- Architecture Section (Bento Grid) -->
+    <section id="architecture" class="py-32 border-t border-white/10">
+        <div class="grid-container">
+            <div class="col-span-12 mb-16 reveal-text">
+                <h2>Modular Architecture</h2>
+                <p class="text-body mt-4 max-w-xl">Our proprietary NovaCore™ engine abstracts the complexity of GPU cluster management, utilizing AWS EKS for 99.99% availability.</p>
+            </div>
+
+            <!-- Bento Grid Layout -->
+            <div class="col-span-12 grid grid-cols-1 md:grid-cols-12 gap-6">
+                
+                <!-- Large Card: Code Snippet -->
+                <div class="bento-card col-span-1 md:col-span-8 reveal-card flex flex-col justify-between min-h-[400px]">
+                    <div>
+                        <h3 class="text-xl font-medium mb-2">LLM Orchestration Config</h3>
+                        <p class="text-sm text-secondary mb-8">Declarative infrastructure management via YAML.</p>
+                    </div>
+                    <div class="bg-black/50 border border-white/5 rounded-lg p-6 font-mono text-sm text-gray-400 overflow-x-auto">
+<pre><code><span class="text-gray-500"># NovaCore Configuration</span>
+<span class="text-white">cluster:</span>
+  provider: aws_eks
+  scaling: dynamic_gpu_aware
+<span class="text-white">models:</span>
+  - "llama-3-70b-v1"
+  - "mistral-large-latest"
+<span class="text-white">optimization:</span>
+  use_spot: true
+  min_reliability: 0.99</code></pre>
                     </div>
                 </div>
+
+                <!-- Small Card 1 -->
+                <div class="bento-card col-span-1 md:col-span-4 reveal-card flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-medium mb-2">Multi-Region</h3>
+                        <p class="text-sm text-secondary">Automatic traffic rerouting between AWS regions to maintain zero downtime during inference.</p>
+                    </div>
+                    <div class="mt-8 text-right">
+                        <span class="font-mono text-xs text-secondary">01 / ROUTING</span>
+                    </div>
+                </div>
+
+                <!-- Small Card 2 -->
+                <div class="bento-card col-span-1 md:col-span-4 reveal-card flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-medium mb-2">Quantization</h3>
+                        <p class="text-sm text-secondary">On-the-fly model optimization for various hardware types from A10G to H100.</p>
+                    </div>
+                    <div class="mt-8 text-right">
+                        <span class="font-mono text-xs text-secondary">02 / COMPUTE</span>
+                    </div>
+                </div>
+
+                <!-- Medium Card -->
+                <div class="bento-card col-span-1 md:col-span-8 reveal-card flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-medium mb-2">Hybrid Deployment</h3>
+                        <p class="text-sm text-secondary max-w-md">Flexible deployment strategies across public cloud (AWS) and on-premise environments, ensuring data locality and compliance.</p>
+                    </div>
+                    <div class="mt-8 flex gap-4">
+                        <span class="badge">AWS Outposts</span>
+                        <span class="badge">Kubernetes</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
     <!-- Optimization Section -->
-    <section id="optimization" class="py-32">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-20">
-                <h2 class="text-4xl font-bold mb-4">Intelligent Cost Optimization</h2>
-                <p class="text-slate-400 max-w-xl mx-auto text-lg">Stop overpaying for compute. Our platform leverages AWS Spot Instances with zero interruption risk.</p>
+    <section id="optimization" class="py-32 border-t border-white/10">
+        <div class="grid-container">
+            <div class="col-span-12 md:col-span-5 reveal-text">
+                <h2>Cost & Performance</h2>
+                <p class="text-body mt-6">Stop overpaying for compute. Our platform leverages AWS Spot Instances with zero interruption risk, utilizing predictive failover algorithms.</p>
             </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="p-10 glass rounded-3xl border-t-2 border-blue-500/30">
-                    <div class="text-5xl font-extrabold text-blue-500 mb-4">-40%</div>
-                    <h4 class="text-xl font-bold mb-2">GPU Spend</h4>
-                    <p class="text-sm text-slate-500">Average reduction in monthly AWS bills for our early adopters through smart instance selection.</p>
+            
+            <div class="col-span-12 md:col-span-6 md:col-start-7 grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12 md:mt-0">
+                <div class="bento-card reveal-card">
+                    <div class="text-5xl font-light mb-4">-40%</div>
+                    <h4 class="text-sm font-medium mb-2">GPU Spend</h4>
+                    <p class="text-xs text-secondary">Average reduction in monthly AWS bills through smart instance selection.</p>
                 </div>
-                <div class="p-10 glass rounded-3xl border-t-2 border-purple-500/30">
-                    <div class="text-5xl font-extrabold text-purple-500 mb-4">2.4x</div>
-                    <h4 class="text-xl font-bold mb-2">Inference Speed</h4>
-                    <p class="text-sm text-slate-500">Performance boost using custom CUDA kernels and optimized model sharding across AWS clusters.</p>
+                <div class="bento-card reveal-card">
+                    <div class="text-5xl font-light mb-4">2.4x</div>
+                    <h4 class="text-sm font-medium mb-2">Inference Speed</h4>
+                    <p class="text-xs text-secondary">Performance boost using custom CUDA kernels and optimized sharding.</p>
                 </div>
-                <div class="p-10 glass rounded-3xl border-t-2 border-green-500/30">
-                    <div class="text-5xl font-extrabold text-green-500 mb-4">100%</div>
-                    <h4 class="text-xl font-bold mb-2">Uptime</h4>
-                    <p class="text-sm text-slate-500">Guaranteed availability through our predictive failover engine that detects Spot terminations before they happen.</p>
+                <div class="bento-card reveal-card sm:col-span-2">
+                    <div class="text-5xl font-light mb-4">99.99%</div>
+                    <h4 class="text-sm font-medium mb-2">Uptime SLA</h4>
+                    <p class="text-xs text-secondary">Guaranteed availability through our predictive failover engine.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Security Section -->
-    <section id="security" class="py-32 bg-slate-950/50">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="glass p-16 rounded-[3rem] relative overflow-hidden">
-                <div class="absolute right-0 top-0 w-96 h-96 bg-purple-600/10 blur-[100px] -z-10"></div>
-                <div class="max-w-2xl">
-                    <h2 class="text-4xl font-bold mb-6">Security by Design</h2>
-                    <p class="text-slate-400 mb-10 text-lg leading-relaxed">
-                        We understand that enterprise data is sacred. Nova Cloud integrates directly into your existing AWS VPC, ensuring that training data and inference requests never traverse the public internet.
-                    </p>
-                    <div class="grid sm:grid-cols-2 gap-8">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center border border-white/10 text-blue-500 font-bold">01</div>
-                            <span class="font-semibold">SOC2 Type II Ready</span>
+    <section id="security" class="py-32 border-t border-white/10 bg-white text-black">
+        <div class="grid-container">
+            <div class="col-span-12 md:col-span-6 reveal-text">
+                <h2 class="text-black">Security by Design</h2>
+                <p class="text-lg text-gray-600 mt-6 max-w-md">
+                    Enterprise data is sacred. Nova Cloud integrates directly into your existing AWS VPC, ensuring that training data and inference requests never traverse the public internet.
+                </p>
+            </div>
+            <div class="col-span-12 md:col-span-5 md:col-start-8 mt-12 md:mt-0">
+                <ul class="space-y-8">
+                    <li class="reveal-card border-b border-black/10 pb-6">
+                        <div class="flex items-baseline justify-between mb-2">
+                            <h4 class="text-xl font-medium">SOC2 Type II Ready</h4>
+                            <span class="font-mono text-xs text-gray-400">01</span>
                         </div>
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center border border-white/10 text-blue-500 font-bold">02</div>
-                            <span class="font-semibold">VPC-only Deployment</span>
+                        <p class="text-sm text-gray-600">Audited processes for security, availability, and confidentiality.</p>
+                    </li>
+                    <li class="reveal-card border-b border-black/10 pb-6">
+                        <div class="flex items-baseline justify-between mb-2">
+                            <h4 class="text-xl font-medium">VPC-only Deployment</h4>
+                            <span class="font-mono text-xs text-gray-400">02</span>
                         </div>
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center border border-white/10 text-blue-500 font-bold">03</div>
-                            <span class="font-semibold">End-to-End Encryption</span>
+                        <p class="text-sm text-gray-600">Leveraging AWS PrivateLink for isolated network connectivity.</p>
+                    </li>
+                    <li class="reveal-card border-b border-black/10 pb-6">
+                        <div class="flex items-baseline justify-between mb-2">
+                            <h4 class="text-xl font-medium">End-to-End Encryption</h4>
+                            <span class="font-mono text-xs text-gray-400">03</span>
                         </div>
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center border border-white/10 text-blue-500 font-bold">04</div>
-                            <span class="font-semibold">GDPR Compliant</span>
-                        </div>
-                    </div>
-                </div>
+                        <p class="text-sm text-gray-600">AES-256 encryption at rest and TLS 1.3 in transit.</p>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-20 px-6 border-t border-white/5">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-12">
-            <div class="col-span-2">
-                <div class="text-2xl font-black mb-6 tracking-tighter uppercase">Nova Cloud Tech</div>
-                <p class="text-slate-500 max-w-sm mb-6">
-                    Building the future of scalable AI. Proudly hosted on AWS.
+    <footer class="py-12 border-t border-white/10">
+        <div class="grid-container items-end">
+            <div class="col-span-12 md:col-span-6">
+                <div class="text-xl font-medium tracking-tight mb-4">Nova Cloud Tech</div>
+                <p class="text-sm text-secondary max-w-xs">
+                    Building the future of scalable AI infrastructure. Proudly hosted on AWS.
                 </p>
-                <div class="flex gap-4">
-                    <div class="w-8 h-8 rounded bg-slate-900 border border-white/10"></div>
-                    <div class="w-8 h-8 rounded bg-slate-900 border border-white/10"></div>
-                    <div class="w-8 h-8 rounded bg-slate-900 border border-white/10"></div>
+            </div>
+            <div class="col-span-12 md:col-span-6 flex flex-col md:flex-row justify-between md:justify-end gap-8 mt-12 md:mt-0 text-sm text-secondary">
+                <div>
+                    <span class="block text-white mb-4 font-medium">Contact</span>
+                    <a href="mailto:zxcmega@nova-cloud-tech.xyz" class="hover:text-white transition-colors block mb-2">zxcmega@nova-cloud-tech.xyz</a>
+                    <span class="block">Karaganda, Kazakhstan</span>
+                </div>
+                <div>
+                    <span class="block text-white mb-4 font-medium">Legal</span>
+                    <a href="#" class="hover:text-white transition-colors block mb-2">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors block">Terms of Service</a>
                 </div>
             </div>
-            <div>
-                <h5 class="font-bold mb-6 uppercase text-xs tracking-widest text-slate-500">Company</h5>
-                <ul class="space-y-4 text-sm text-slate-400">
-                    <li><a href="#" class="hover:text-blue-500 transition">About Us</a></li>
-                    <li><a href="#" class="hover:text-blue-500 transition">Engineering Blog</a></li>
-                    <li><a href="#" class="hover:text-blue-500 transition">Careers</a></li>
-                </ul>
+            <div class="col-span-12 mt-16 pt-8 border-t border-white/10 flex justify-between items-center text-xs text-secondary">
+                <span>&copy; 2026 Nova Cloud Tech.</span>
+                <span class="font-mono">SYS_STATUS: ONLINE</span>
             </div>
-            <div>
-                <h5 class="font-bold mb-6 uppercase text-xs tracking-widest text-slate-500">Support</h5>
-                <ul class="space-y-4 text-sm text-slate-400">
-                    <li><a href="mailto:zxcmega@nova-cloud-tech.xyz" class="hover:text-blue-500 transition">Contact Support</a></li>
-                    <li><a href="#" class="hover:text-blue-500 transition">Documentation</a></li>
-                    <li><a href="#" class="hover:text-blue-500 transition">Karaganda, KZ</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="max-w-6xl mx-auto mt-20 pt-8 border-t border-white/5 text-center text-xs text-slate-600">
-            © 2026 Nova Cloud Tech. All rights reserved.
         </div>
     </footer>
+
+    <!-- GSAP Animations -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animations
+        gsap.to(".reveal-text", {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power3.out",
+            delay: 0.2
+        });
+
+        // Scroll Animations for Cards
+        gsap.utils.toArray('.reveal-card').forEach(card => {
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                ease: "power2.out"
+            });
+        });
+
+        // Scroll Animations for Section Headers
+        gsap.utils.toArray('section h2').forEach(header => {
+            gsap.from(header, {
+                scrollTrigger: {
+                    trigger: header,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 20,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power2.out"
+            });
+        });
+    </script>
 </body>
 </html>
